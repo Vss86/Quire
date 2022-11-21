@@ -1,0 +1,59 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: white;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 1rem;
+  color: black;
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.sidemenu {
+  background-color: #004d87;
+  color: white;
+  width: 12%;
+}
+
+.welcome-content {
+  padding: 2% 5%;
+}
+
+.notebook-menu {
+  background-color: #ebebeb;
+  width: 15%;
+  border-left-style: solid;
+  border-right-style: solid;
+}
+
+.notebook-item {
+  padding: 2% 5%;
+  border-bottom: solid 1px lightgray;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  height: 100px;
+}
+
+.sidemenu ul {
+  list-style-type: none;
+  padding: 10%;
+}
+
+.sidemenu li {
+  color: white;
+}
+
+.sidemenu li:hover {
+  cursor: pointer;
+}
+
+.logo img {
+  width: 50px;
+  height: auto;
+}
