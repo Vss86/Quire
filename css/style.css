@@ -57,3 +57,31 @@ body {
   width: 50px;
   height: auto;
 }
+
+.side-href a {
+  padding: 8%;
+}
+
+.side-href a:visited {
+  color: white;
+}
+
+.side-href a:hover {
+  color: orange;
+}
+
+.pencil {
+  font-size: xx-large;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 60px;
+  align-content: flex-end;
+  cursor: pointer;
+  background-color: #004d87;
+}
+
+.pencil:hover {
+  background-color: white;
+  color: black;
+}
