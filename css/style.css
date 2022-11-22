@@ -42,9 +42,16 @@ i {
   
 }
 
+.fa-pencil{
+  background:#004d87;
+  color: white;
+  
+}
+
 .fa:hover {
   border: 2px solid white;
   border-radius: 50%;
+  padding: 10px;
   color: #004d87 ;
   background-color: white;
   transition: 0.3s;
@@ -85,4 +92,10 @@ i {
 .logo img {
   width: 50px;
   height: auto;
+}
+footer{
+  float: right;
+  position:relative;
+  margin-top: 100px ;
+  margin-right: 50px;
 }
