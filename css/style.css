@@ -67,6 +67,7 @@ i {
   border-left-style: solid;
   border-right-style: solid;
   overflow-y: scroll;
+  resize: horizontal;
 }
 
 .notebook-item {
@@ -79,9 +80,7 @@ i {
 }
 
 .note-editor {
-  padding: 5%;
   width: 100%;
-  
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -136,23 +135,23 @@ footer{
 }
 
 #note-title {
+  padding: 1%;
+  width: 100%;  
   border: none;
   font-weight: 900;
   font-size: 2em;
-}
-
-#note-title:focus {
-  
-  border: none;
+  background-color: white;
+  outline: none;
 }
 
 #note-content {
-  border: none;
-  
+  padding: 1%;
+  border: none;  
   resize: none;
   width: 100%;
-  height: 100%;
-  
+  height: 100%;  
+  background-color: white;
+  outline: none;
 }
 
 .dropdown-menu > button {
@@ -170,3 +169,25 @@ footer{
   background:#004d87;
   color: white;
 }
+
+.docs-toolbar {
+  padding: 0.5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  gap: 1%;
+  margin: auto;
+  background-color: lightgray;
+}
+
+#toolbar-btn {
+  width: 20px;
+}
+
+#toolbar-btn:focus {
+  width: 20px;
+  border-radius: 20%;
+  background-color: black;
+  color: white;
+}
+

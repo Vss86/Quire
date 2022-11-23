@@ -1,12 +1,8 @@
 let notebook_list = [
     {
-        "title": "test",
-        "content": "Lorem ipsum",
-    },
-    {
-        "title": "test",
-        "content": "Lorem ipsum",
-    },
+        "title": "Click here to edit the title",
+        "content": "Click here and start typing to edit your first note or click the plus sign to create new note.",
+    }
 ];
 
 let selected = 0;
@@ -17,7 +13,8 @@ function onloaded() {
         notebook_list = JSON.parse(localStorage.getItem("notebook-list"));
     
         console.log(notebook_list);
-    loadNote();
+    
+    openNote(0);
 }
 
 function loadNote() {
@@ -36,13 +33,14 @@ function loadNote() {
     
     localStorage.setItem("notebook-list", JSON.stringify(notebook_list));
 
-    document.getElementById("note-title").value = notebook_list[selected].title;
-    document.getElementById("note-content").value = notebook_list[selected].content;
-
 }
 
 function openNote(i) {
     selected = i;
+    
+    document.getElementById("note-title").value = notebook_list[selected].title;
+
+    document.getElementById("note-content").innerHTML = notebook_list[selected].content;
     loadNote();
 
 }
@@ -60,6 +58,6 @@ function changeTitle(event) {
 }
 
 function changeContent(event) {
-    notebook_list[selected].content= event.value;
+    notebook_list[selected].content = event.innerText;
     loadNote();
 }
