@@ -7,48 +7,51 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/73f5418307.js" crossorigin="anonymous"></script>    
+    <script src="/js/script.js"></script>
     <title>Document</title>
   </head>
-  <body>
+  <body onload="onloaded()">
     <nav class="sidemenu">
       <ul>
-        <li class="logo"><img src="/img/q.png" alt="" /></li>
+        <li class="logo"><a href="index.html"><img src="/img/q.png" alt="" /></a></li> 
         <li><i class="fa fa-search fa-2x"></i></li>
         <li><i class="fa fa-star fa-2x"></i></li>
         <li><i class="fa fa-bar-chart fa-2x"></i></li>
         <li><i class="fa fa-gear fa-2x"></i></li>
+      <li><a href="/index.html"><i class="fa fa-circle-arrow-left fa-2x"></i></a></li> 
       </ul>
-      <p class="side-href"><a href="/index.html">Back</a></p>
     </nav>
     <aside class="notebook-menu">
-      <ul>
-        <li class="notebook-item">
-          <h2>Test note</h2>
-          <p>Test</p>
-        </li>
-        <li class="notebook-item">
-          <h2>Test note</h2>
-          <p>Test</p>
-        </li>
-        <li class="notebook-item">
-          <h2>Test note</h2>
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum
-            itaque sed culpa quae facere officiis, quo rerum non dolore eius
-            quos! Totam id doloremque deserunt eum, sit quasi minus quae.
-          </p>
-        </li>
+      <ul id="notebook-list">
+
       </ul>
+      
     </aside>
-    <main class="note-editor">
-      <h1>Test note</h1>
-      <p>
+    <main class="note-editor" id="note-editor">
+      <div>
+        <label for="pet-select">Font Size:</label>
+
+<select name="pets" id="pet-select">
+    <option value="">--Please choose an option--</option>
+    <option value="dog">Dog</option>
+    <option value="cat">Cat</option>
+    <option value="hamster">Hamster</option>
+    <option value="parrot">Parrot</option>
+    <option value="spider">Spider</option>
+    <option value="goldfish">Goldfish</option>
+</select>
+      <button class="printer"><i class="fa-solid fa-print"></i></button>  
+      </div>
+      <input type="text" id="note-title" value="test" oninput="changeTitle(this)">
+      <textarea id="note-content" oninput="changeContent(this)">
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo illo
         reiciendis est non mollitia dolorum consequatur neque. Autem, enim,
         expedita voluptate vero porro qui distinctio, doloribus harum aliquid
         nostrum repudiandae.
-      </p>
-      <button class="pencil"><p>&#9998;</p></button>
+      </textarea>
+      
+    <button class="pencil" id="add-note" onclick="newNote()"><p><i class="fa-solid fa-plus"></i></p></button>
     </main>
   </body>
 </html>
