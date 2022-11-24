@@ -5,56 +5,85 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <script src="https://kit.fontawesome.com/73f5418307.js" crossorigin="anonymous"></script>    
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
+    />
+    <script
+      src="https://kit.fontawesome.com/73f5418307.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="/js/script.js"></script>
     <title>Document</title>
   </head>
   <body onload="onloaded()">
     <nav class="sidemenu">
       <ul>
-        <li class="logo"><a href="index.html"><img src="/img/q.png" alt="" /></a></li> 
+        <li class="logo">
+          <a href="index.html"><img src="/img/q.png" alt="" /></a>
+        </li>
         <li><i class="fa fa-search fa-2x"></i></li>
         <li><i class="fa fa-star fa-2x"></i></li>
         <li><i class="fa fa-bar-chart fa-2x"></i></li>
         <li><i class="fa fa-gear fa-2x"></i></li>
-      <li><a href="/index.html"><i class="fa fa-circle-arrow-left fa-2x"></i></a></li> 
+        <li>
+          <a href="/index.html"
+            ><i class="fa fa-circle-arrow-left fa-2x"></i
+          ></a>
+        </li>
       </ul>
     </nav>
     <aside class="notebook-menu">
-      <ul id="notebook-list">
-
-      </ul>
-      
+      <ul id="notebook-list"></ul>
     </aside>
     <main class="note-editor" id="note-editor">
-  <div class="docs-toolbar">
-  <select id="docs-font" class="font-family" role="listbox">
-    <option style="font-family:Arial;">Arial</option>
-    <option style="font-family:'Arial Black'">Arial Black</option>
-    <option style="font-family:Verdana">Verdana</option>
-  </select>
-  <div class="font-size">F-Size</div>
-  <div class="font-bold">
-    <button id="toolbar-btn"><strong>B</strong></button>
-  </div>
-  <div class="font-cursive">
-    <button id="toolbar-btn"><em>I</em></button>
-  </div>
-  <div class="font-underline">
-    <button id="toolbar-btn"><u>U</u></button>
-  </div>
+      <div class="docs-toolbar">
+        <select id="docs-font" class="font-family" role="listbox">
+          <option style="font-family: Arial">Arial</option>
+          <option style="font-family: 'Arial Black'">Arial Black</option>
+          <option style="font-family: Verdana">Verdana</option>
+        </select>
+        
+        
+        <div class="fontOption"> 
+          <button class="negative">-</button>     
+          <div class="fontSizeButton">
+          <div class="fontSizeSelect" style="user-select: none;">
+            <div class="fontSizeOption" id=":16" role="option" aria-selected="true;" aria-setsize="14" aria-posinset="4" style="user-select: none;">
+              <input class="fontSizeInput" type="text" aria-autocomplete="both" aria-label="Font size" style="user-select: none;" placeholder="11"></input>
+            </div>
+          </div>
+       
+          </div>
+        <button class="positive">+</button>
+        </div>  
 
+        <div id="boldButton" class="font-bold" role="button">
+          <button id="toolbar-btn"><strong>B</strong></button>
+        </div>
+        <div id="italicButton" class="font-cursive" role="button">
+          <button id="toolbar-btn"><em>I</em></button>
+        </div>
+        <div id="underlineButton" class="font-underline" role="button">
+          <button id="toolbar-btn"><u>U</u></button>
+        </div>
 
-      <button class="printer"><i class="fa-solid fa-print fa-2x"></i></button>  
+        <button class="printer"><i class="fa-solid fa-print fa-2x"></i></button>
       </div>
-      <input type="text" id="note-title" oninput="changeTitle(this)">
-      <div id="note-content" oninput="changeContent(this)" contenteditable="true">
+      <input type="text" id="note-title" oninput="changeTitle(this)" />
+      <div
+        id="note-content"
+        oninput="changeContent(this)"
+        contenteditable="true"
+      ></div>
 
-      </div>
-      
-    <button class="pencil" id="add-note" onclick="newNote()"><p><i class="fa-solid fa-plus"></i></p></button>
+      <button class="pencil" id="add-note" onclick="newNote()">
+        <p><i class="fa-solid fa-plus"></i></p>
+      </button>
     </main>
   </body>
 </html>
