@@ -131,7 +131,7 @@ footer {
   bottom: 20px;
 }
 
-.printer .fa-solid {
+.printerButton .fa-solid {
   color: black;
   background-color: white;
   width: 15px;
@@ -184,8 +184,7 @@ footer {
   background-color: lightgray;
 }
 
-.fontOption {
-  justify-content: space-between;
+.fontSize {
   flex-direction: row;
   display: flex;
 }
@@ -210,4 +209,13 @@ footer {
   border-radius: 20%;
   background-color: black;
   color: white;
+}
+
+.editedDate {
+  padding: 1%;  
+}
+
+.color {
+  width: 20px;
+  height: 20px;
 }

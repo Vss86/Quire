@@ -42,27 +42,29 @@
     </aside>
     <main class="note-editor" id="note-editor">
       <div class="docs-toolbar">
-        <select id="docs-font" class="font-family" role="listbox">
-          <option style="font-family: Arial">Arial</option>
-          <option style="font-family: 'Arial Black'">Arial Black</option>
-          <option style="font-family: Verdana">Verdana</option>
+        <select id="docs-font" class="font-family" role="listbox" oninput="changeFont()">
         </select>
         
         
-        <div class="fontOption"> 
-          <button class="negative">-</button>     
-          <div class="fontSizeButton">
+        <div class="fontSize"> 
+            <div>
+              <button class="negative">-</button> 
+            </div>
+
+          <div class="fontSizeButton">            
           <div class="fontSizeSelect" style="user-select: none;">
             <div class="fontSizeOption" id=":16" role="option" aria-selected="true;" aria-setsize="14" aria-posinset="4" style="user-select: none;">
-              <input class="fontSizeInput" type="text" aria-autocomplete="both" aria-label="Font size" style="user-select: none;" placeholder="11"></input>
+              <input class="fontSizeInput" type="number" aria-autocomplete="both" aria-label="Font size" style="user-select: none;" placeholder="11" oninput="changeFontSize(this)"></input>
             </div>
+          </div>       
           </div>
-       
-          </div>
-        <button class="positive">+</button>
-        </div>  
 
-        <div id="boldButton" class="font-bold" role="button">
+          <div>
+        <button class="positive">+</button>
+        </div>
+      </div>  
+
+        <div id="boldButton" class="font-bold" role="button" onclick="formatText()">
           <button id="toolbar-btn"><strong>B</strong></button>
         </div>
         <div id="italicButton" class="font-cursive" role="button">
@@ -71,17 +73,26 @@
         <div id="underlineButton" class="font-underline" role="button">
           <button id="toolbar-btn"><u>U</u></button>
         </div>
-        <div class="printerBtn">
-        <button class="printer"><i class="fa-solid fa-print fa-1x" role="button"></i></button>
+        <div class="color">
+            <input class="color" type="color" oninput="changeColor(this)">
+        </div>
+        <div class="printer">
+        <button class="printer-btn" role="button" onclick="printDiv('printableArea')" value="print a div!"><i class="fa-solid fa-print fa-1x"></i></button>
+      </div>
+      <div class="imageButton">
+        <button class="image-btn"><i class="fa-solid fa-image fa-1x" role="button"></i></button>
       </div>
     </div>
+
+<section id="printableArea"> 
       <input type="text" id="note-title" oninput="changeTitle(this)" />
+      <em class="editedDate" id="noteEdited"></em>
       <div
         id="note-content"
         oninput="changeContent(this)"
-        contenteditable="true"
-      ></div>
+        contenteditable="true"></div>
 
+</section>
       <button class="pencil" id="add-note" onclick="newNote()">
         <p><i class="fa-solid fa-plus"></i></p>
       </button>
