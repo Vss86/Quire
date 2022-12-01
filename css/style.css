@@ -256,3 +256,7 @@ footer {
 	color:black;
   justify-self: end;
 }
+
+.settingsMenu {
+  display: none;
+}

@@ -12,6 +12,8 @@ let notebook_list = [
     }
 ];
 
+let quill;
+
 //Index of the current note
 let selected = 0;
 
@@ -31,7 +33,12 @@ function onloaded() {
     if(JSON.parse(localStorage.getItem("notebook-list")) != null) //Check if localstorage is empty
         notebook_list = JSON.parse(localStorage.getItem("notebook-list"));
     
-    
+      quill = new Quill('#note-content', {
+    theme: 'snow'
+  });
+  quill.on('text-change', function(delta, oldDelta, source) {
+    changeContent();
+  });
     openNote(selected);
 }
 
@@ -57,7 +64,7 @@ function loadNote() {
         //HTML for notes in the sidebar
         document.getElementById("notebook-list").innerHTML += `
         <li class="notebook-item" onclick="openNote(${i})">
-        <div><button class="star">&#9734</button></div>
+
         <em class="creationDate" id="noteDate">${(notebook.date_created.toLocaleDateString([], {
             month: "2-digit",
             day: "2-digit",
@@ -80,10 +87,12 @@ This functions opens the note
 function openNote(i) {
     selected = i;
     localStorage.setItem("selected", selected);
-    
-    document.getElementById("note-title").value = notebook_list[selected].title;
 
-    document.getElementById("note-content").innerHTML = notebook_list[selected].content;
+      
+    document.getElementById("note-title").value = notebook_list[selected].title;
+    
+    console.log(notebook_list[selected].content);
+    quill.setContents(notebook_list[selected].content);
     loadNote();
 
 }
@@ -117,30 +126,14 @@ function changeTitle(element) {
 
 
 //This functions set the content to element
-function changeContent(element) {
-    notebook_list[selected].content = element.innerText;
+function changeContent() {
+    console.log(quill.getContents());
+    notebook_list[selected].content = quill.getContents();
     loadNote();
 }
 
 function formatText() {
-    let replacementText = "";
-    console.log(notebook_list[selected].content);
 
-    let sel, range;
-    if (window.getSelection) {
-        sel = window.getSelection();
-        if (sel.rangeCount) {
-            range = sel.getRangeAt(0);
-            replacementText = "<strong>" + sel.toString() + "</strong>";
-            range.deleteContents();
-            range.insertNode(document.createTextNode(replacementText));
-            changeContent(document.getElementById("note-content"));
-
-        }
-    } else if (document.selection && document.selection.createRange) {
-        range = document.selection.createRange();
-        range.text = replacementText;
-    }
 }
 
 //Array of all the fonts
@@ -202,4 +195,3 @@ function printDiv(divName) {
 function imageMenu(){
     document.getElementById("myDropdown").classList.toggle("show");
 }
-
