@@ -6,10 +6,32 @@ When HTML is load
 let notebook_list = [
   {
     id: uuidv4(),
-    title: "Click here to edit the title",
-    content:
+    title: "Add your title here",
+    text_content:
       "Click here and start typing to edit your first note or click the plus sign to create new note.",
+    content: [],
+    favorite: false,
   },
+];
+
+let toolbarOptions = [
+  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+  ['blockquote', 'code-block'],
+
+  [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+  [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+  [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+  [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+  [{ 'direction': 'rtl' }],                         // text direction
+
+  [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+  [{ 'font': [] }],
+  [{ 'align': [] }],
+
+  ['clean']                                         // remove formatting button
 ];
 
 let quill;
@@ -20,9 +42,13 @@ let selected = 0;
 // This variable is the last focused element (title or content)
 let focusedElement = null;
 
+let showFavorite = false;
+
 //The function loads after HTML is loaded
 function onloaded() {
-  loadFontOptions();
+
+
+  //loadFontOptions();
 
   if (localStorage.getItem("selected") != null)
     //Check if localstorage is empty
@@ -33,6 +59,9 @@ function onloaded() {
     notebook_list = JSON.parse(localStorage.getItem("notebook-list"));
 
   quill = new Quill("#note-content", {
+    modules: {
+      toolbar: toolbarOptions
+    },
     theme: "snow",
   });
   quill.on("text-change", function (delta, oldDelta, source) {
@@ -44,6 +73,7 @@ function onloaded() {
 /*LoadNote function does two things:
 - renders the list of all the notes
 */
+
 function loadNote() {
   document.getElementById("notebook-list").innerHTML = "";
 
@@ -58,23 +88,37 @@ function loadNote() {
 
     notebook.date_created = new Date(notebook.date_created); //Converts date from JSON to the Date format
 
-    //HTML for notes in the sidebar
-    document.getElementById("notebook-list").innerHTML += `
-        <li class="notebook-item" onclick="openNote(${i})">
+    if(!showFavorite || notebook.favorite) {
+      let fa_star = notebook.favorite ?  "fa-star" : "fa-star-o";
 
-        <em class="creationDate" id="noteDate">${notebook.date_created.toLocaleDateString(
-          [],
-          {
-            month: "2-digit",
-            day: "2-digit",
-            year: "2-digit",
-          }
-        )}</em>
+      //HTML for notes in the sidebar
+      document.getElementById("notebook-list").innerHTML += `
+          <li class="notebook-item" onclick="openNote(${i})" >
+  
+          <em class="creationDate" id="noteDate">${notebook.date_created.toLocaleDateString(
+            [],
+            {
+              month: "2-digit",
+              day: "2-digit",
+              year: "2-digit",
+            }
+            
+          )}
+          </em>
+          <div class="note-header">
+          <div class="note-button-group">
+              <button onclick="addFavorite('${notebook.id}')"><i class="fa ${fa_star}" aria-hidden="true" ></i></button>
+              <button onclick="deleteNote('${notebook.id}')"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+            </div>
             <h2>${notebook.title}</h2>
-            <p>${notebook.content}</p>
-        </li>
-        `;
-  }
+            
+          </div>
+          <p>${notebook.text_content}</p>
+          </li>
+          `;
+    }
+    }
+
 
   localStorage.setItem("notebook-list", JSON.stringify(notebook_list));
 }
@@ -95,13 +139,49 @@ function openNote(i) {
 
 //This function creates a new empty note
 function newNote() {
+  if(showFavorite)
+    return;
+
   notebook_list.push({
     id: uuidv4(),
-    title: "New note",
-    content: "My new note",
+    title: "New title",
+    text_content: "New note",
+    content: {
+      ops: [
+        { insert: ' new note ' },
+      ]
+    },
     date_created: new Date(),
+    favorite: false,
   });
   selected = notebook_list.length - 1;
+  loadNote();
+}
+
+function deleteNote(id) {
+  for(let i = 0; i < notebook_list.length; i++) {
+    if(notebook_list[i].id == id) {
+      let confirmed = confirm("Are you want to delete " + notebook_list[i].title + "?");
+      if(confirmed) {
+        notebook_list.splice(i, 1);
+        loadNote();
+      }
+    }
+  }
+}
+
+function addFavorite(id) {
+  for(let i = 0; i < notebook_list.length; i++) {
+    if(notebook_list[i].id == id) {
+      notebook_list[i].favorite = !notebook_list[i].favorite;
+      loadNote();
+    }
+    
+  }
+}
+
+function sortFavorite() {
+  showFavorite = !showFavorite;
   loadNote();
 }
 
@@ -123,7 +203,7 @@ function changeTitle(element) {
 
 //This functions set the content to element
 function changeContent() {
-  console.log(quill.getContents());
+  notebook_list[selected].text_content = quill.getText();
   notebook_list[selected].content = quill.getContents();
   loadNote();
 }
@@ -145,7 +225,7 @@ const fonts = [
   "Times New Roman",
   "Verdana",
 ];
-
+/*
 function changeFont() {
   const fontOptions = document.getElementById("docs-font");
 
@@ -164,12 +244,12 @@ function loadFontOptions() {
         <option style="font-family: ${fonts[i]}">${fonts[i]}</option>
         `;
   }
-}
+}*/
 
 function setFocusedElement(e) {
   focusedElement = e;
 }
-
+/*
 function changeFontSize(event) {
   if (focusedElement != null)
     focusedElement.style.fontSize = event.value + "px";
@@ -183,7 +263,7 @@ function changeColor(event) {
   else {
     document.getElementById("note-content").style.color = event.value;
   }
-}
+}*/
 
 function printDiv(divName) {
   var printContents = document.getElementById(divName).innerHTML;
@@ -199,6 +279,7 @@ function printDiv(divName) {
 function imageMenu() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
+
 /* 
 function darkMode() {
   var element = document.body;
