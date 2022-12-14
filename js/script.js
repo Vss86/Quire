@@ -31,6 +31,8 @@ let toolbarOptions = [
   [{ 'font': [] }],
   [{ 'align': [] }],
 
+  ['link', 'image'],
+
   ['clean']                                         // remove formatting button
 ];
 
@@ -276,9 +278,9 @@ function printDiv(divName) {
   document.body.innerHTML = originalContents;
 }
 
-function imageMenu() {
+/* function imageMenu() {
   document.getElementById("myDropdown").classList.toggle("show");
-}
+} */
 
 /* 
 function darkMode() {
